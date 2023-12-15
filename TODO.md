@@ -16,9 +16,11 @@ Grid with Input Fields:
     Attach an onChange handler to each input field.
     When the user types a letter into a cell, the onChange handler updates the state to reflect the new value.
 
-Implement the Letter Pool:
-Display a set of letters that the player can choose from. This can be an array of letter objects.
-Enable Letter Placement:
+# Implement the Letter Pool:
+- [x] Display a set of letters that the player can choose from. This can be an array of letter objects.
+- [ ] Display the count of letters remaining to be chosen in the upper corner of the tile
+
+# Enable Letter Placement:
 
 Implement functionality to let the player place a letter from the pool into a grid cell.
 Handle State Changes:
