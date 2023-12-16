@@ -8,8 +8,8 @@
   margin: 0;
   border: 1px solid black;
   box-sizing: border-box; /* Include padding and border in the width and height */
-text-align: center;
-font-size: larger;
+  text-align: center;
+  font-size: larger;
 }
 
 .tiles {
@@ -24,6 +24,11 @@ font-size: larger;
   font-size: 20px; /* Larger font size for the letter */
   font-weight: bold; /* Make the letter bold */
   margin: 5px; /* Margin around each tile */
+}
+
+.tiles sup {
+  vertical-align: super;
+  font-size: 12px;
 }
 
 .letter-bag, .letter-hand {
