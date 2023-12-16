@@ -1,4 +1,10 @@
 // Function to create an initial letter bag
+// range of ASCII values for uppercase letters A-Z is 65-90
+const lenAlpha = 26
+const offsetAlpha = 65
+// if we need a list of keys
+// const alpha = Array.from(Array(lenAlpha)).map((e, i) => i + offsetAlpha);
+// const alphabet = alpha.map((x) => String.fromCharCode(x));
 const letterDistribution = {
 	A: 9,
 	B: 2,
@@ -28,23 +34,27 @@ const letterDistribution = {
 	Z: 1,
 };
 export const createInitialLetterBag = () => {
-	let initialLetterBag = [];
-	for (const [letter, count] of Object.entries(letterDistribution)) {
-		for (let i = 0; i < count; i++) {
-			initialLetterBag.push(letter);
-		}
-	}
-	return initialLetterBag;
+	// let initialLetterBag = [];
+	// for (const [letter, count] of Object.entries(letterDistribution)) {
+	// 	initialLetterBag.push([letter, count]);
+	// }
+	return letterDistribution;
 };
 
 // Function to draw a random letter from the letter bag into the hand
 export const drawRandomLetter = (letterBag) => {
-	if (letterBag.length === 0) {
-		return null; // or handle the empty bag case as needed
+	const letterCounts = Object.values(letterBag);
+	letterCounts.sort((a, b) => { return b - a}); // sort in descending order
+	const highestCount = letterCounts[0] // grab first item (highest count)
+	if (highestCount === 0) {
+		return null; // all letters spent and bag is empty (change the draw message?)
 	}
-
-	const randomIndex = Math.floor(Math.random() * letterBag.length);
-	return letterBag[randomIndex];
+	const randomChar = String.fromCharCode(Math.floor(Math.random() * lenAlpha) + offsetAlpha);
+	if (letterBag[randomChar] === 0) {
+		return drawRandomLetter(letterBag); // try again (end case handled above when all letter counts are zero)
+	} else {
+		return randomChar;
+	}
 };
 
 //Function to create an initial grid that is "size*size" big and filled with empty strings
@@ -55,11 +65,23 @@ export const createInitialGrid = () => {
 	return Array(gridSize * gridSize).fill("");
 };
 
-// Function to remove the first occurrence of a specific letter from an array, used by handleDrawLetter and handlePlayLetter
-export const removeOneLetter = (bag, letterToRemove) => {
-	const index = bag.findIndex((l) => l === letterToRemove);
-	if (index > -1) {
-		return [...bag.slice(0, index), ...bag.slice(index + 1)];
+export const reduceOneLetter = (bag, letterToRemove) => {
+	const countLetter = bag[letterToRemove]
+	if (countLetter > 0) {
+		// console.log(`removing letter ${letterToRemove}`)
+		bag[letterToRemove] = countLetter-1; // this is firing twice and removing two only in Strict Mode (not production)
 	}
+	// if letter already spent, caller should not be drawing it. Leave at 0
 	return bag;
+}
+// removes the first occurrence of a specific letter from an array
+// e.g. playing a letter from the tray
+export const removeOneLetter = (tray, letterToRemove) => {
+	const index = tray.indexOf(letterToRemove);
+	if (index > -1) {
+		// console.log(`Deleting letter ${letterToRemove} at position ${index}`)
+		return tray.splice(index, 1)
+	} else {
+		return tray;
+	}
 };

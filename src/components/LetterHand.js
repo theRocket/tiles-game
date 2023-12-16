@@ -7,6 +7,7 @@ const LetterHand = ({
 	isTransitioning,
 	playedLetter,
 }) => {
+	const buttonColor = isTransitioning ? "#787877" : "#4CAF50" // gray or green
 	return (
 		<div className="letter-hand">
 			<h2>This is your letter hand.</h2>
@@ -35,8 +36,9 @@ const LetterHand = ({
 			</ul>
 			<button
 				onClick={onDrawLetter}
+				disabled={isTransitioning}
 				style={{
-					backgroundColor: "#4CAF50",
+					backgroundColor: {buttonColor}, // not working, but need to indicate disabled while 2 sec. transition happens
 					color: "white", // White text
 					padding: "12px 20px",
 					border: "none", // No border for a cleaner look

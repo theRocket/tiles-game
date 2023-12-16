@@ -6,6 +6,7 @@ import {
 	drawRandomLetter,
 	createInitialLetterBag,
 	createInitialGrid,
+	reduceOneLetter,
 	removeOneLetter,
 } from "./gameUtils";
 
@@ -28,12 +29,13 @@ const GameBoard = () => {
 			setIsTransitioning(true);
 
 			// After 1 second (once the fade-out animation completes)...
+			// TODO: disable draw button while this is happening (attempted but not working)
 			setTimeout(() => {
 				// Add the drawn letter to the hand
 				setLetterHand((prevHand) => [...prevHand, letter]);
 
-				// Remove the drawn letter from the bag.
-				setLetterBag((prevBag) => removeOneLetter(prevBag, letter));
+				// Reduce the number of letters in the bag.
+				setLetterBag((prevBag) => reduceOneLetter(prevBag, letter));
 
 				// End the transition and reset the drawn letter state
 				setIsTransitioning(false);
@@ -86,16 +88,18 @@ const GameBoard = () => {
 					</div>
 				</h3>
 			</div>
-			<div
-				style={{
-					border: "1px solid #ccc",
-					boxShadow: "0px 0px 10px #eee",
-					margin: "10px",
-					padding: "10px",
-				}}>
+			<div style={{
+						border: "1px solid #ccc",
+						boxShadow: "0px 0px 10px #eee",
+						margin: "10px",
+						padding: "10px",
+					}}>
+				<h2>This is the letter bag.</h2>{" "}
+				<h3>
+					These are all the letters that you might get when you "Draw A Tile"{" "}
+				</h3>
 				<LetterBag
 					letterBag={letterBag}
-					setLetterBag={setLetterBag}
 					drawnLetter={drawnLetter}
 					isTransitioning={isTransitioning}
 				/>
