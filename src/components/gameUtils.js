@@ -80,7 +80,10 @@ export const removeOneLetter = (tray, letterToRemove) => {
 	const index = tray.indexOf(letterToRemove);
 	if (index > -1) {
 		// console.log(`Deleting letter ${letterToRemove} at position ${index}`)
-		return tray.splice(index, 1)
+		// return tray.splice(index, 1) // acting buggy, may be a React issue with modifying existing array
+		let frontPart = tray.slice(0, index);
+		let lastPart  = tray.slice(index+1); // index to end of array
+		return [...frontPart, ...lastPart];
 	} else {
 		return tray;
 	}

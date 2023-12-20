@@ -7,7 +7,10 @@ const LetterHand = ({
 	isTransitioning,
 	playedLetter,
 }) => {
-	const buttonColor = isTransitioning ? "#787877" : "#4CAF50" // gray or green
+	const tray = letterHand; // need a copy per https://react.dev/reference/react/StrictMode#fixing-bugs-found-by-double-rendering-in-development
+
+	// const buttonColor = isTransitioning ? "#787877" : "#4CAF50" // gray or green // not working
+	const buttonColor = "#4CAF50" // gray or green
 	return (
 		<div className="letter-hand">
 			<h2>This is your letter hand.</h2>
@@ -16,7 +19,7 @@ const LetterHand = ({
 				to randomly collect a new letter from the letter bag.
 			</h3>
 			<ul>
-				{letterHand.map((letter, index) => (
+				{tray.map((letter, index) => (
 					<li
 						key={index}
 						className={`tiles ${
