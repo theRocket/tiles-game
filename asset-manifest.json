@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tiles-game/static/css/main.2358a724.css",
-    "main.js": "/tiles-game/static/js/main.d3c0816c.js",
+    "main.css": "/tiles-game/static/css/main.e29d5435.css",
+    "main.js": "/tiles-game/static/js/main.09ed72a9.js",
     "static/js/787.7e3f14eb.chunk.js": "/tiles-game/static/js/787.7e3f14eb.chunk.js",
     "index.html": "/tiles-game/index.html",
-    "main.2358a724.css.map": "/tiles-game/static/css/main.2358a724.css.map",
-    "main.d3c0816c.js.map": "/tiles-game/static/js/main.d3c0816c.js.map",
+    "main.e29d5435.css.map": "/tiles-game/static/css/main.e29d5435.css.map",
+    "main.09ed72a9.js.map": "/tiles-game/static/js/main.09ed72a9.js.map",
     "787.7e3f14eb.chunk.js.map": "/tiles-game/static/js/787.7e3f14eb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2358a724.css",
-    "static/js/main.d3c0816c.js"
+    "static/css/main.e29d5435.css",
+    "static/js/main.09ed72a9.js"
   ]
 }
