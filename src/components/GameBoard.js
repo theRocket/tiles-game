@@ -58,46 +58,12 @@ const GameBoard = () => {
 
 	return (
 		<div>
-			<div style={{ textAlign: "center" }}>
-				{" "}
-				{/* Centering container */}
-				<h1>Bananarama Grams</h1>
-				<h2>by Rhys Smoker</h2>
-				<h3 style={{ marginBottom: "20px" }}>
-					A React app that demonstrates props, lifting state, useState, useRef,
-					and useEffect.
-				</h3>
-				<h3>
-					<div style={{ display: "flex", justifyContent: "space-around" }}>
-						<div>
-							<a
-								href="https://github.com/MERN-ing-the-midnight-oil/tiles-game/blob/main/README.md"
-								target="_blank"
-								rel="noopener noreferrer">
-								Explanation of components.
-							</a>
-						</div>
-						<div>
-							<a
-								href="https://github.com/MERN-ing-the-midnight-oil/tiles-game"
-								target="_blank"
-								rel="noopener noreferrer">
-								Project Github Repository
-							</a>
-						</div>
-					</div>
-				</h3>
-			</div>
 			<div style={{
 						border: "1px solid #ccc",
 						boxShadow: "0px 0px 10px #eee",
 						margin: "10px",
 						padding: "10px",
 					}}>
-				<h2>This is the letter bag.</h2>{" "}
-				<h3>
-					These are all the letters that you might get when you "Draw A Tile"{" "}
-				</h3>
 				<LetterBag
 					letterBag={letterBag}
 					drawnLetter={drawnLetter}

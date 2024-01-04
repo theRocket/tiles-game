@@ -91,11 +91,7 @@ const CrosswordGrid = ({
 
 	return (
 		<>
-			<h2>This is the yellow grid. </h2>{" "}
-			<h3>
-				Click anywhere and type a word using letters from your letter hand.
-				Click twice to write downward instead of across the grid.
-			</h3>
+			<h2>Game Board</h2>{" "}
 			<table>
 				<tbody>
 					{Array.from({ length: gridSize }).map((_, rowIndex) => (

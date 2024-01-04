@@ -1,4 +1,14 @@
 
+body {
+  background: black;
+  text-align: center;
+  color: white;
+}
+
+a {
+  color: hotpink;
+}
+
 /* ".cell input" applies to any input tags in cell className" */
 .cell input {
   background-color: yellow;
@@ -13,6 +23,7 @@
 }
 
 .tiles {
+  color: black;
   display: inline-flex; /* Flex for centering content within each tile */
   justify-content: center; /* Center the letter horizontally */
   align-items: center; /* Center the letter vertically */
