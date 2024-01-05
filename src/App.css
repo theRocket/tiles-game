@@ -1,4 +1,14 @@
 
+body {
+  background: black;
+  text-align: center;
+  color: white;
+}
+
+a {
+  color: hotpink;
+}
+
 /* ".cell input" applies to any input tags in cell className" */
 .cell input {
   background-color: yellow;
@@ -8,11 +18,12 @@
   margin: 0;
   border: 1px solid black;
   box-sizing: border-box; /* Include padding and border in the width and height */
-text-align: center;
-font-size: larger;
+  text-align: center;
+  font-size: larger;
 }
 
 .tiles {
+  color: black;
   display: inline-flex; /* Flex for centering content within each tile */
   justify-content: center; /* Center the letter horizontally */
   align-items: center; /* Center the letter vertically */
@@ -24,6 +35,11 @@ font-size: larger;
   font-size: 20px; /* Larger font size for the letter */
   font-weight: bold; /* Make the letter bold */
   margin: 5px; /* Margin around each tile */
+}
+
+.tiles sup {
+  vertical-align: super;
+  font-size: 12px;
 }
 
 .letter-bag, .letter-hand {
@@ -46,11 +62,11 @@ font-size: larger;
 
 .fade-out {
   animation: fadeOut 2s forwards;
-  background-color: red !important
+  background-color: pink !important
 }
 
 .fade-in {
   animation: fadeIn 2s forwards;
-  background-color: red !important
+  background-color: pink !important
 }
 

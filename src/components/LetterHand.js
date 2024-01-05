@@ -7,36 +7,39 @@ const LetterHand = ({
 	isTransitioning,
 	playedLetter,
 }) => {
+	const tray = letterHand; // need a copy per https://react.dev/reference/react/StrictMode#fixing-bugs-found-by-double-rendering-in-development
+
+	// const buttonColor = isTransitioning ? "#787877" : "#4CAF50" // gray or green // not working
+	// const buttonColor = "#4CAF50" // gray or green
 	return (
-		<div className="letter-hand">
-			<h2>This is your letter hand.</h2>
-			<h3>
-				These letters may be typed into the yellow grid. Click on "Draw Tiles"
-				to randomly collect a new letter from the letter bag.
-			</h3>
-			<ul>
-				{letterHand.map((letter, index) => (
-					<li
-						key={index}
-						className={`tiles ${
-							letter === playedLetter && isTransitioning ? "fade-out" : ""
-						}`}>
-						{letter}
-					</li>
-				))}
-				{/* Fade-in effect for the newly drawn letter during transition */}
-				{isTransitioning && drawnLetter && (
-					<li className="tiles fade-in">{drawnLetter}</li>
-				)}
-				{/* Display message when there are no letters in the hand */}
-				{letterHand.length === 0 && !isTransitioning && (
-					<li style={{ color: "red" }}>There are no letters in your hand</li>
-				)}
-			</ul>
+		<div className="letter-hand" style={{ textAlign: "center" }}>
+			<h2>Letter Hand</h2>{" "}
+			<div>
+				<ul>
+					{tray.map((letter, index) => (
+						<li
+							key={index}
+							className={`tiles ${
+								letter === playedLetter && isTransitioning ? "fade-out" : ""
+							}`}>
+							{letter}
+						</li>
+					))}
+					{/* Fade-in effect for the newly drawn letter during transition */}
+					{isTransitioning && drawnLetter && (
+						<li className="tiles fade-in">{drawnLetter}</li>
+					)}
+					{/* Display message when there are no letters in the hand */}
+					{letterHand.length === 0 && !isTransitioning && (
+						<li style={{ color: "pink" }}>your hand is empty</li>
+					)}
+				</ul>
+			</div>
 			<button
 				onClick={onDrawLetter}
+				// disabled={isTransitioning} //  need to indicate disabled while 2 sec. transition happens
 				style={{
-					backgroundColor: "#4CAF50",
+					backgroundColor: "#4CAF50", // {buttonColor}, // not working, but need to indicate disabled while 2 sec. transition happens
 					color: "white", // White text
 					padding: "12px 20px",
 					border: "none", // No border for a cleaner look

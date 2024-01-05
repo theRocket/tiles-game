@@ -1,35 +1,30 @@
-const LetterBag = ({ letterBag, drawnLetter, isTransitioning }) => {
-	let fadeApplied = false; // Flag to check if the fade-out has been applied to that specific indexed letter in the bag
+import Letter from "./Letter";
 
+const LetterBag = ({ letterBag, drawnLetter, isTransitioning }) => {
+	const bagArr = Object.entries(letterBag);
 	return (
-		<div className="letter-bag">
-			<h2>This is the letter bag.</h2>{" "}
-			<h3>
-				These are all the letters that you might get when you "Draw A Tile"{" "}
-			</h3>
-			{letterBag.map((letter, index) => {
-				// Check if this letter matches the drawnLetter and transitioning, and fade-out not yet applied
-				if (letter === drawnLetter && isTransitioning && !fadeApplied) {
-					fadeApplied = true; // Set flag to true to prevent applying fade-out again
-					// Render the letter normally if it's not the drawn letter or if fade-out has already been applied
-					return (
-						<span
-							key={index}
-							className="tiles fade-out">
-							{letter}
-						</span>
-					);
-				}
-				return (
-					<span
-						key={index}
-						className="tiles">
-						{letter}
-					</span>
-				);
-			})}
+		<div style={{ textAlign: "center" }}>
+			<h2>Letter Bag</h2>{" "}
+			{bagArr.map((letterTuple) => (
+				<Letter
+					key={letterTuple[0].charCodeAt(0)} // convert to unique int
+					letter={letterTuple[0]}
+					letterCount={letterTuple[1]}
+					drawnLetter={drawnLetter}
+					isTransitioning={isTransitioning}/>
+			))}
+			<div>
+				<h4 style={{ marginBottom: "20px" }}>
+					Use the button in your Letter Hand to draw a letter tile.<br />
+					Collect enough letters to form a <a href="https://wordfinder.yourdictionary.com/blog/bananagrams-dictionary-find-the-right-and-valid-words/"
+						target="_blank"
+						rel="noopener noreferrer">valid word</a>.<br />
+					To use your hand, click or tap on an empty square in the Game Board and begin typing from your available letters.<br />
+					You can click/tap twice to place letters downwards.
+				</h4>
+			</div>
 		</div>
-	);
+	)
 };
 
 export default LetterBag;

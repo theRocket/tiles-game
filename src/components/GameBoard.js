@@ -6,6 +6,7 @@ import {
 	drawRandomLetter,
 	createInitialLetterBag,
 	createInitialGrid,
+	reduceOneLetter,
 	removeOneLetter,
 } from "./gameUtils";
 
@@ -28,12 +29,13 @@ const GameBoard = () => {
 			setIsTransitioning(true);
 
 			// After 1 second (once the fade-out animation completes)...
+			// TODO: disable draw button while this is happening (attempted but not working)
 			setTimeout(() => {
 				// Add the drawn letter to the hand
 				setLetterHand((prevHand) => [...prevHand, letter]);
 
-				// Remove the drawn letter from the bag.
-				setLetterBag((prevBag) => removeOneLetter(prevBag, letter));
+				// Reduce the number of letters in the bag.
+				setLetterBag((prevBag) => reduceOneLetter(prevBag, letter));
 
 				// End the transition and reset the drawn letter state
 				setIsTransitioning(false);
@@ -56,46 +58,14 @@ const GameBoard = () => {
 
 	return (
 		<div>
-			<div style={{ textAlign: "center" }}>
-				{" "}
-				{/* Centering container */}
-				<h1>Bananarama Grams</h1>
-				<h2>by Rhys Smoker</h2>
-				<h3 style={{ marginBottom: "20px" }}>
-					A React app that demonstrates props, lifting state, useState, useRef,
-					and useEffect.
-				</h3>
-				<h3>
-					<div style={{ display: "flex", justifyContent: "space-around" }}>
-						<div>
-							<a
-								href="https://github.com/MERN-ing-the-midnight-oil/tiles-game/blob/main/README.md"
-								target="_blank"
-								rel="noopener noreferrer">
-								Explanation of components.
-							</a>
-						</div>
-						<div>
-							<a
-								href="https://github.com/MERN-ing-the-midnight-oil/tiles-game"
-								target="_blank"
-								rel="noopener noreferrer">
-								Project Github Repository
-							</a>
-						</div>
-					</div>
-				</h3>
-			</div>
-			<div
-				style={{
-					border: "1px solid #ccc",
-					boxShadow: "0px 0px 10px #eee",
-					margin: "10px",
-					padding: "10px",
-				}}>
+			<div style={{
+						border: "1px solid #ccc",
+						boxShadow: "0px 0px 10px #eee",
+						margin: "10px",
+						padding: "10px",
+					}}>
 				<LetterBag
 					letterBag={letterBag}
-					setLetterBag={setLetterBag}
 					drawnLetter={drawnLetter}
 					isTransitioning={isTransitioning}
 				/>
@@ -103,6 +73,7 @@ const GameBoard = () => {
 			<div
 				style={{
 					display: "flex", // Using Flexbox
+					flexWrap: "wrap",
 					justifyContent: "center", // Centering the items horizontally
 					alignItems: "flex-start", // Aligning items to the start of the flex container
 					margin: "10px",
