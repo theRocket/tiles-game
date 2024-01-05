@@ -15,12 +15,12 @@ const LetterBag = ({ letterBag, drawnLetter, isTransitioning }) => {
 			))}
 			<div>
 				<h4 style={{ marginBottom: "20px" }}>
-					Use the button in your Letter Hand to draw a letter tile<br />
+					Use the button in your Letter Hand to draw a letter tile.<br />
 					Collect enough letters to form a <a href="https://wordfinder.yourdictionary.com/blog/bananagrams-dictionary-find-the-right-and-valid-words/"
 						target="_blank"
 						rel="noopener noreferrer">valid word</a>.<br />
-					Then (left mouse button) click anywhere on the Game Board grid and begin typing to use letters from your letter hand.<br />
-					Click twice to write downward instead of horizontally across the grid.
+					To use your hand, click or tap on an empty square in the Game Board and begin typing from your available letters.<br />
+					You can click/tap twice to place letters downwards.
 				</h4>
 			</div>
 		</div>

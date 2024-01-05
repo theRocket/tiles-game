@@ -62,11 +62,11 @@ a {
 
 .fade-out {
   animation: fadeOut 2s forwards;
-  background-color: red !important
+  background-color: pink !important
 }
 
 .fade-in {
   animation: fadeIn 2s forwards;
-  background-color: red !important
+  background-color: pink !important
 }
 

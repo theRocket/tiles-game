@@ -73,6 +73,7 @@ const GameBoard = () => {
 			<div
 				style={{
 					display: "flex", // Using Flexbox
+					flexWrap: "wrap",
 					justifyContent: "center", // Centering the items horizontally
 					alignItems: "flex-start", // Aligning items to the start of the flex container
 					margin: "10px",
