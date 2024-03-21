@@ -1,16 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Bars } from 'react-loader-spinner'
-import useLetterHandStore from './useLetterHandStore'
+import React from 'react';
+import styled from 'styled-components';
+import useLetterHandStore from './useLetterHandStore';
 
 const LetterHand = () => {
-  const { state, handleDrawLetter, isLetterBeingPlayed, foundIndex } = useLetterHandStore()
+  const { state, handleDrawLetter, isLetterBeingPlayed, foundIndex } = useLetterHandStore();
 
   return (
     <OuterWrapper>
       <h2>Letter Hand</h2>&nbsp;
       <div className={'outer-list-wrapper'}>
-        <ul className='letter-list'>
+        <ul className="letter-list">
           {state &&
             state.letterHand &&
             state.letterHand.map((letter, index) => (
@@ -18,21 +17,28 @@ const LetterHand = () => {
                 {letter}
               </li>
             ))}
-          {state.isTransitioning && state.drawnLetter && <li className='tiles fade-in'>{state.drawnLetter}</li>}
-          {state.letterHand.length === 0 && !state.isTransitioning && <li style={{ color: 'pink' }}>your hand is empty</li>}
+          {state.isTransitioning && state.drawnLetter && <li className="tiles fade-in">{state.drawnLetter}</li>}
+          {state.letterHand.length === 0 && !state.isTransitioning && (
+            <li style={{ color: 'pink' }}>your hand is empty</li>
+          )}
         </ul>
       </div>
-      <SelectionButton onClick={handleDrawLetter} className='draw-btn' disabled={state.isTransitioning} isTransitioning={state.isTransitioning}>
+      <SelectionButton
+        onClick={handleDrawLetter}
+        className="draw-btn"
+        disabled={state.isTransitioning}
+        isTransitioning={state.isTransitioning}
+      >
         Draw A Tile
       </SelectionButton>
       {/* <div className='loading-wrapper'>
         <Bars height='40' width='40' color='#4fa94d' ariaLabel='bars-loading' wrapperStyle={{}} wrapperClass='' visible={state.isTransitioning} />
       </div> */}
     </OuterWrapper>
-  )
-}
+  );
+};
 
-export default LetterHand
+export default LetterHand;
 
 const OuterWrapper = styled.div`
   display: flex;
@@ -59,7 +65,7 @@ const OuterWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-`
+`;
 
 const SelectionButton = styled.button`
   background-color: ${(props) => (props.isTransitioning ? 'red' : '#4caf50')};
@@ -75,4 +81,4 @@ const SelectionButton = styled.button`
   @media (max-width: 794px) {
     padding: 20px 80px;
   }
-`
+`;

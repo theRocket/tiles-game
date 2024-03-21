@@ -1,1 +1,1 @@
-export { default } from './LetterHand'
+export { default } from './LetterHand';
