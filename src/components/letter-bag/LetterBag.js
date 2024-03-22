@@ -6,7 +6,7 @@ const LetterBag = () => {
 
   return (
     <div className="text-center">
-      <h2 className="text-2xl font-bold my-5">Letter Bag</h2>{' '}
+      <h2>Letter Bag</h2>{' '}
       {Object.entries(letterBag || {}).map(([letter, count]) => (
         <Letter key={`letter-${letter}`} letter={letter[0]} />
       ))}
@@ -16,7 +16,6 @@ const LetterBag = () => {
           <br />
           Collect enough letters to form a{' '}
           <a
-            className="text-pink-400 underline"
             href="https://wordfinder.yourdictionary.com/blog/bananagrams-dictionary-find-the-right-and-valid-words/"
             target="_blank"
             rel="noopener noreferrer"

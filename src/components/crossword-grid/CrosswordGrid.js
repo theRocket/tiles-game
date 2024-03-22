@@ -112,7 +112,7 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
 
   return (
     <div className="flex justify-center items-center flex-col">
-      <h2 className="text-2xl font-bold my-5">Game Board</h2>
+      <h2>Game Board</h2>
       <table>
         <tbody>
           {Array.from({ length: gridSize }).map((_, rowIndex) => (

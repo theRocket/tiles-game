@@ -10,14 +10,14 @@ const GameBoard = () => {
 
   return (
     <div>
-      <div className="border border-[#cccccc] shadow-game-board m-2.5">
+      <div className="board-border shadow-game-board m-2.5">
         <LetterBag />
       </div>
       <div className="flex flex-col justify-center items-start m-2.5 md:flex-row">
-        <div className="border border-[#cccccc] shadow-game-board w-full md:m-2.5 md:p-2.5 md:w-1/2">
+        <div className="board-border shadow-game-board w-full md:m-2.5 md:p-2.5 md:w-1/2">
           <LetterHand />
         </div>
-        <div className="flex flex-col justify-center border border-[#cccccc] shadow-game-board w-full my-2.5 md:m-2.5 md:p-2.5 md:w-1/2">
+        <div className="flex flex-col justify-center board-border shadow-game-board w-full my-2.5 md:m-2.5 md:p-2.5 md:w-1/2">
           <CrosswordGrid gridSize={10} cellValues={gridState} setCellValues={setGridState} />
         </div>
       </div>

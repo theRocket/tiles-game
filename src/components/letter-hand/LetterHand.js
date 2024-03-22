@@ -20,7 +20,7 @@ const LetterHand = () => {
 
   return (
     <div className="flex items-center flex-col text-center justify-center pb-2.5 md:pb-0">
-      <h2 className="text-2xl font-bold mt-5 mb-7">Letter Hand</h2>
+      <h2>Letter Hand</h2>
       <div className="w-full">
         <ul className="list-none my-4">
           {letterHand &&
