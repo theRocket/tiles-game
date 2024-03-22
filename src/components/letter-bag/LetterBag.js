@@ -5,17 +5,18 @@ const LetterBag = () => {
   const letterBag = createInitialLetterBag();
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h2>Letter Bag</h2>{' '}
+    <div className="text-center">
+      <h2 className="text-2xl font-bold my-5">Letter Bag</h2>{' '}
       {Object.entries(letterBag || {}).map(([letter, count]) => (
         <Letter key={`letter-${letter}`} letter={letter[0]} />
       ))}
       <div>
-        <h4 style={{ marginBottom: '20px' }}>
+        <h4 className="text-base font-bold leading-normal mt-5 mb-4">
           Use the button in your Letter Hand to draw a letter tile.
           <br />
           Collect enough letters to form a{' '}
           <a
+            className="text-pink-400 underline"
             href="https://wordfinder.yourdictionary.com/blog/bananagrams-dictionary-find-the-right-and-valid-words/"
             target="_blank"
             rel="noopener noreferrer"

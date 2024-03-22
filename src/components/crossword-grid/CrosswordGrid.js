@@ -2,7 +2,6 @@
 ///useState, and useRef
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { animationDuration } from '../../models/constants';
 import { playLetter, playLetterEnd } from '../../store/slice';
 
@@ -112,12 +111,12 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
   };
 
   return (
-    <OuterWapper>
-      <h2>Game Board</h2>{' '}
+    <div className="flex justify-center items-center flex-col">
+      <h2 className="text-2xl font-bold my-5">Game Board</h2>
       <table>
         <tbody>
           {Array.from({ length: gridSize }).map((_, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr className="table-row" key={rowIndex}>
               {Array.from({ length: gridSize }).map((_, colIndex) => {
                 const cellIndex = rowIndex * gridSize + colIndex;
                 const isCellSelected = rowIndex === selectedCell.row && colIndex === selectedCell.col;
@@ -125,11 +124,12 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
                 return (
                   <td
                     key={`${rowIndex}-${colIndex}`}
-                    className="cell"
+                    className="table-cell p-1"
                     onClick={() => handleCellClick(rowIndex, colIndex)}
                   >
                     {isCellSelected && <span className="direction-indicator">{directionIndicator}</span>}
                     <input
+                      className="bg-[#ff0] text-black w-10 h-10 border-black text-center text-xl font-normal"
                       ref={cellRefs.current[cellIndex]}
                       type="text"
                       maxLength="1"
@@ -148,15 +148,8 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
           ))}
         </tbody>
       </table>
-    </OuterWapper>
+    </div>
   );
 };
 
 export default CrosswordGrid;
-
-const OuterWapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;

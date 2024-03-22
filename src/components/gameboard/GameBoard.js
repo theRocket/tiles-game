@@ -1,82 +1,28 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { createInitialGrid } from '../../utils';
 import CrosswordGrid from '../crossword-grid/CrosswordGrid';
 import LetterBag from '../letter-bag/LetterBag';
 import LetterHand from '../letter-hand/LetterHand';
-import { GameBoardProvider } from './context-config';
 
 const GameBoard = () => {
   //using the useState hook to manage children's state
   const [gridState, setGridState] = useState(createInitialGrid);
 
   return (
-    <GameBoardProvider>
-      <OuterWrapper>
-        <div className="letter-bag-wrapper">
-          <LetterBag />
+    <div>
+      <div className="border border-[#cccccc] shadow-game-board m-2.5">
+        <LetterBag />
+      </div>
+      <div className="flex flex-col justify-center items-start m-2.5 md:flex-row">
+        <div className="border border-[#cccccc] shadow-game-board w-full md:m-2.5 md:p-2.5 md:w-1/2">
+          <LetterHand />
         </div>
-        <div className="bottom-content">
-          <div className="letter-hand">
-            <LetterHand />
-          </div>
-          <div className="cross-word-grid">
-            <CrosswordGrid gridSize={10} cellValues={gridState} setCellValues={setGridState} />
-          </div>
+        <div className="flex flex-col justify-center border border-[#cccccc] shadow-game-board w-full my-2.5 md:m-2.5 md:p-2.5 md:w-1/2">
+          <CrosswordGrid gridSize={10} cellValues={gridState} setCellValues={setGridState} />
         </div>
-      </OuterWrapper>
-    </GameBoardProvider>
+      </div>
+    </div>
   );
 };
 
 export default GameBoard;
-
-const OuterWrapper = styled.div`
-  .letter-bag-wrapper {
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px #eee;
-    margin: 10px;
-    padding: 0px;
-  }
-
-  .bottom-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 10px;
-
-    @media (max-width: 794px) {
-      flex-direction: column;
-    }
-  }
-
-  .letter-hand {
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px #eee;
-    margin: 10px;
-    padding: 10px;
-    width: 50%;
-    @media (max-width: 794px) {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  .cross-word-grid {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px #eee;
-    margin: 10px;
-    padding: 10px;
-    width: 50%;
-    @media (max-width: 794px) {
-      width: 100%;
-      margin: 10px 0;
-      padding: 0;
-    }
-  }
-`;
