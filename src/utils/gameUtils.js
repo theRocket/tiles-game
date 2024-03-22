@@ -1,7 +1,3 @@
-// Function to create an initial letter bag
-// range of ASCII values for uppercase letters A-Z is 65-90
-const lenAlpha = 26;
-const offsetAlpha = 65;
 // if we need a list of keys
 // const alpha = Array.from(Array(lenAlpha)).map((e, i) => i + offsetAlpha);
 // const alphabet = alpha.map((x) => String.fromCharCode(x));

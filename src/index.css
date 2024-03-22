@@ -18,6 +18,9 @@
   a {
     @apply text-pink-400 underline;
   }
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }
 
 @layer components {

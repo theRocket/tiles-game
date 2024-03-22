@@ -4,6 +4,7 @@ import { createInitialLetterBag, drawRandomLetter } from '../utils';
 export const tilesSlice = createSlice({
   name: 'tiles',
   initialState: {
+    canDraw: true,
     drawnLetter: null,
     isTransitioning: false,
     letterBag: createInitialLetterBag(),
@@ -27,6 +28,7 @@ export const tilesSlice = createSlice({
         (lb, [key, value]) => (key === letter ? { ...lb, [key]: --value } : { ...lb, [key]: value }),
         {}
       );
+      state.canDraw = Object.values(state.letterBag).some((value) => value > 0);
     },
     playLetter: (state, action) => {
       const letter = action.payload;

@@ -5,6 +5,7 @@ import { drawLetter, drawLetterEnd } from '../../store/slice';
 
 const LetterHand = () => {
   const dispatch = useDispatch();
+  const canDraw = useSelector((state) => state.tiles.canDraw);
   const drawnLetter = useSelector((state) => state.tiles.drawnLetter);
   const isTransitioning = useSelector((state) => state.tiles.isTransitioning);
   const letterBeingPlayed = useSelector((state) => state.tiles.letterBeingPlayed);
@@ -47,7 +48,7 @@ const LetterHand = () => {
           isTransitioning ? 'bg-[#f00] cursor-wait' : 'bg-[#4caf50] cursor-pointer'
         } text-white py-5 px-20 md:py-3 md:px-5 border-none rounded text-base shadow-draw-tile`}
         onClick={drawTile}
-        disabled={isTransitioning}
+        disabled={!canDraw || isTransitioning}
       >
         Draw A Tile
       </button>
