@@ -1,33 +1,53 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import useLetterHandStore from './useLetterHandStore';
+import { animationDuration } from '../../models/constants';
+import { drawLetter, drawLetterEnd } from '../../store/slice';
 
 const LetterHand = () => {
-  const { state, handleDrawLetter, isLetterBeingPlayed, foundIndex } = useLetterHandStore();
+  const dispatch = useDispatch();
+  const drawnLetter = useSelector((state) => state.tiles.drawnLetter);
+  const isTransitioning = useSelector((state) => state.tiles.isTransitioning);
+  const letterBeingPlayed = useSelector((state) => state.tiles.letterBeingPlayed);
+  const letterHand = useSelector((state) => state.tiles.letterHand);
+
+  const drawTile = () => {
+    dispatch(drawLetter());
+
+    setTimeout(() => {
+      dispatch(drawLetterEnd());
+    }, animationDuration);
+  };
 
   return (
     <OuterWrapper>
       <h2>Letter Hand</h2>&nbsp;
       <div className={'outer-list-wrapper'}>
         <ul className="letter-list">
-          {state &&
-            state.letterHand &&
-            state.letterHand.map((letter, index) => (
-              <li key={index} className={`tiles ${isLetterBeingPlayed && foundIndex === index ? 'fade-out' : ''}`}>
-                {letter}
-              </li>
-            ))}
-          {state.isTransitioning && state.drawnLetter && <li className="tiles fade-in">{state.drawnLetter}</li>}
-          {state.letterHand.length === 0 && !state.isTransitioning && (
-            <li style={{ color: 'pink' }}>your hand is empty</li>
-          )}
+          {letterHand &&
+            letterHand.length > 0 &&
+            letterHand.map((letter, index) => {
+              const isLast = index === letterHand.length - 1;
+              const className =
+                isTransitioning && drawnLetter === letter && isLast
+                  ? 'fade-in'
+                  : letterBeingPlayed && letterBeingPlayed === letter
+                  ? 'fade-out'
+                  : '';
+              return (
+                <li key={`letter-${letter}`} className={`tiles ${className}`}>
+                  {letter}
+                </li>
+              );
+            })}
         </ul>
+        {letterHand.length === 0 && !isTransitioning && <p style={{ color: 'pink' }}>your hand is empty</p>}
       </div>
       <SelectionButton
-        onClick={handleDrawLetter}
+        onClick={drawTile}
         className="draw-btn"
-        disabled={state.isTransitioning}
-        isTransitioning={state.isTransitioning}
+        disabled={isTransitioning}
+        isTransitioning={isTransitioning}
       >
         Draw A Tile
       </SelectionButton>

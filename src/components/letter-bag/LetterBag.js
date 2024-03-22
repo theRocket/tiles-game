@@ -1,21 +1,14 @@
-import { useContext } from 'react';
-import { GameBoardContext } from '../gameboard/context-config';
+import { createInitialLetterBag } from '../../utils';
 import Letter from '../letter/Letter';
 
 const LetterBag = () => {
-  const { state } = useContext(GameBoardContext);
+  const letterBag = createInitialLetterBag();
 
   return (
     <div style={{ textAlign: 'center' }}>
       <h2>Letter Bag</h2>{' '}
-      {Object.entries(state.letterBag || {}).map((letterTuple) => (
-        <Letter
-          key={letterTuple[0].charCodeAt(0)} // convert to unique int
-          letter={letterTuple[0]}
-          letterCount={letterTuple[1]}
-          drawnLetter={state.drawnLetter}
-          isTransitioning={state.isTransitioning}
-        />
+      {Object.entries(letterBag || {}).map(([letter, count]) => (
+        <Letter key={`letter-${letter}`} letter={letter[0]} />
       ))}
       <div>
         <h4 style={{ marginBottom: '20px' }}>

@@ -1,17 +1,23 @@
 //CrosswordGrid.js
 ///useState, and useRef
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { removeOneLetter } from '../../utils/gameUtils';
-import { GameBoardContext } from '../gameboard/context-config';
+import { animationDuration } from '../../models/constants';
+import { playLetter, playLetterEnd } from '../../store/slice';
 
 const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
-  const { state, setIsTransitioning, updateLetterPlayed, updateLetterHand } = useContext(GameBoardContext);
+  // const { state, setIsTransitioning, updateLetterPlayed, updateLetterHand } = useContext(GameBoardContext);
   //what cell in the grid is selected
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   //which way the crossword is going, across or down
   const [inputDirection, setInputDirection] = useState('right'); // 'right' or 'down'
   //creates an array of refs, one for each cell in the grid
+
+  const dispatch = useDispatch();
+
+  const isTransitioning = useSelector((state) => state.tiles.isTransitioning);
+  const letterHand = useSelector((state) => state.tiles.letterHand);
 
   //below, ...Array(gridSize*gridSize) makes a new array and expands the elements in to a new array of undefined values to make it suitable for mapping
   //.map() is a JS array method that creates a new array by doing something  to each element, in this case calling React.createRef() on each undefined object
@@ -34,15 +40,17 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
 
   // Handles updating a cell with a letter typed by the user, and calculates the next cellindex to receive focus and sets focus on that cell
   const handleCellChange = (cellIndex, newValue) => {
+    const playedLetter = newValue.toUpperCase();
+
     //prevent the user from typing a letter not in the letter hand
-    if (!state.letterHand.includes(newValue.toUpperCase())) {
+    if (!letterHand.includes(playedLetter)) {
       alert('You may only use letters present in your letter hand');
       return;
     }
 
     // Update the cell value
     const newValues = [...cellValues];
-    newValues[cellIndex] = newValue.toUpperCase();
+    newValues[cellIndex] = playedLetter;
     setCellValues(newValues);
 
     // Calculate the index of the next cell based on inputDirection
@@ -68,8 +76,8 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
     setSelectedCell({ row: nextRow, col: nextCol });
 
     //deleting /fading out the newValue using onPlayLetter aka handlePlayLetter
-    if (state.letterHand.includes(newValue.toUpperCase())) {
-      handlePlayLetter(newValue.toUpperCase());
+    if (letterHand.includes(playedLetter)) {
+      handlePlayLetter(playedLetter);
     }
   };
 
@@ -86,15 +94,21 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
   //Handler function that updates states when a letter is played on the grid.
   //playedLetter should be given to handlePlayLetter whenever a user successfully types a new letter in the grid.
   const handlePlayLetter = (playedLetter) => {
-    //Set the letter played in the grid that must be removed from the hand
-    updateLetterPlayed(playedLetter);
-    setIsTransitioning(true);
+    dispatch(playLetter(playedLetter));
 
     setTimeout(() => {
-      updateLetterHand(removeOneLetter(state.letterHand, playedLetter));
-      setIsTransitioning(false);
-      updateLetterPlayed(null);
-    }, 2000);
+      dispatch(playLetterEnd());
+    }, animationDuration);
+
+    //Set the letter played in the grid that must be removed from the hand
+    // updateLetterPlayed(playedLetter);
+    // setIsTransitioning(true);
+
+    // setTimeout(() => {
+    //   updateLetterHand(removeOneLetter(state.letterHand, playedLetter));
+    //   setIsTransitioning(false);
+    //   updateLetterPlayed(null);
+    // }, 2000);
   };
 
   return (
@@ -121,6 +135,11 @@ const CrosswordGrid = ({ gridSize, cellValues, setCellValues }) => {
                       maxLength="1"
                       value={cellValues[cellIndex]}
                       onChange={(e) => handleCellChange(cellIndex, e.target.value)}
+                      onKeyDown={(e) => {
+                        if (isTransitioning) {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </td>
                 );

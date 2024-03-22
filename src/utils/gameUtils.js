@@ -43,20 +43,29 @@ export const createInitialLetterBag = () => {
 
 // Function to draw a random letter from the letter bag into the hand
 export const drawRandomLetter = (letterBag) => {
-  const letterCounts = Object.values(letterBag);
-  letterCounts.sort((a, b) => {
-    return b - a;
-  }); // sort in descending order
-  const highestCount = letterCounts[0]; // grab first item (highest count)
-  if (highestCount === 0) {
-    return null; // all letters spent and bag is empty (change the draw message?)
-  }
-  const randomChar = String.fromCharCode(Math.floor(Math.random() * lenAlpha) + offsetAlpha);
-  if (letterBag[randomChar] === 0) {
-    return drawRandomLetter(letterBag); // try again (end case handled above when all letter counts are zero)
-  } else {
-    return randomChar;
-  }
+  // const letterCounts = Object.values(letterBag);
+  // letterCounts.sort((a, b) => {
+  //   return b - a;
+  // }); // sort in descending order
+  // const highestCount = letterCounts[0]; // grab first item (highest count)
+  // if (highestCount === 0) {
+  //   return null; // all letters spent and bag is empty (change the draw message?)
+  // }
+  // const randomChar = String.fromCharCode(Math.floor(Math.random() * lenAlpha) + offsetAlpha);
+  // if (letterBag[randomChar] === 0) {
+  //   return drawRandomLetter(letterBag); // try again (end case handled above when all letter counts are zero)
+  // } else {
+  //   return randomChar;
+  // }
+  const availableLetters = Object.entries(letterBag).reduce(
+    (l, [key, value]) => (value > 0 ? { ...l, [key]: value } : l),
+    {}
+  );
+  const letters = Object.keys(availableLetters);
+  const count = letters.length;
+  const idx = Math.floor(Math.random() * count);
+  const letter = letters[idx];
+  return letter;
 };
 
 //Function to create an initial grid that is "size*size" big and filled with empty strings
